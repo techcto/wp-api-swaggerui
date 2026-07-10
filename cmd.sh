@@ -13,12 +13,9 @@ bundle(){
 
     FILES="assets bin template tests swaggerauth.php swaggerbag.php swaggersetting.php swaggertemplate.php wp-api-swaggerui.php"
 
-    # On WSL uname typically returns Linux
-    if [[ "$(uname -s)" == "Linux" ]]; then
-        7z a -r output/swagger.zip $FILES
-    else
-        zip a -r output/swagger.zip $FILES
-    fi
+    mkdir -p output
+    rm -f output/swagger.zip
+    zip -r output/swagger.zip $FILES
 
     rm -f ../../devops/ami/wordpress/bin/swagger.zip
     cp output/swagger.zip ../../devops/ami/wordpress/bin/swagger.zip
